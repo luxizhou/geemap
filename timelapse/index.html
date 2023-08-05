@@ -21,7 +21,7 @@
         <link rel="next" href="../toolbar/">
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -647,6 +647,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ee_tile_layers/" class="md-nav__link">
+        ee_tile_layers module
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../examples/" class="md-nav__link">
         examples module
       </a>
@@ -705,6 +719,20 @@
     <li class="md-nav__item">
       <a href="../legends/" class="md-nav__link">
         legends module
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../map_widgets/" class="md-nav__link">
+        map_widgets module
       </a>
     </li>
   
@@ -2872,8 +2900,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../notebooks/112_cartoee_basemap_X/" class="md-nav__link">
-        112 cartoee basemap X
+      <a href="../notebooks/112_cartoee_basemap/" class="md-nav__link">
+        112 cartoee basemap
       </a>
     </li>
   
@@ -3182,6 +3210,48 @@
     <li class="md-nav__item">
       <a href="../notebooks/134_ee_to_geotiff/" class="md-nav__link">
         134 ee to geotiff
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/135_segmentation/" class="md-nav__link">
+        135 segmentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/136_download_parallel/" class="md-nav__link">
+        136 download parallel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/137_create_grid/" class="md-nav__link">
+        137 create grid
       </a>
     </li>
   
@@ -3522,7 +3592,7 @@
 <a id="geemap.timelapse"></a>
     <div class="doc doc-contents first">
 
-      <p>Module for creating timelapse from various Earth Engine ImageCollection.</p>
+      <p>Module for creating timelapse from Earth Engine data.</p>
 
 
 
@@ -3667,7 +3737,7 @@
     <span class="p">)</span>
 
     <span class="n">logo_image</span> <span class="o">=</span> <span class="n">logo_raw_image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">)</span>
-    <span class="n">logo_image</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
+    <span class="n">logo_image</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">Image</span><span class="o">.</span><span class="n">LANCZOS</span><span class="p">)</span>
 
     <span class="n">gif_width</span><span class="p">,</span> <span class="n">gif_height</span> <span class="o">=</span> <span class="n">gif</span><span class="o">.</span><span class="n">size</span>
     <span class="n">mask_im</span> <span class="o">=</span> <span class="kc">None</span>
@@ -3819,8 +3889,13 @@
         <details class="quote">
           <summary>Source code in <code>geemap/timelapse.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_overlay</span><span class="p">(</span>
-    <span class="n">collection</span><span class="p">,</span> <span class="n">overlay_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">):</span>
+    <span class="n">collection</span><span class="p">:</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">,</span>
+    <span class="n">overlay_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">],</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">region</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds an overlay to an image collection.</span>
 
 <span class="sd">    Args:</span>
@@ -4868,7 +4943,12 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">video_args</span><span class="p">[</span><span class="s2">&quot;bands&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;vis-gray&quot;</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))):</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span>
+        <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">))))</span>
+    <span class="p">):</span>
         <span class="n">count</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
         <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_gif</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
@@ -7384,7 +7464,12 @@ Credits to Justin Braaten. See also https://jstnbraaten.medium.com/goes-in-earth
                 <span class="n">col</span><span class="p">,</span> <span class="n">overlay_data</span><span class="p">,</span> <span class="n">overlay_color</span><span class="p">,</span> <span class="n">overlay_width</span><span class="p">,</span> <span class="n">overlay_opacity</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">))))</span>
+        <span class="p">):</span>
             <span class="n">count</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
             <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_gif</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
@@ -7918,7 +8003,12 @@ Credits to Justin Braaten. See also https://jstnbraaten.medium.com/goes-in-earth
                 <span class="n">col</span><span class="p">,</span> <span class="n">overlay_data</span><span class="p">,</span> <span class="n">overlay_color</span><span class="p">,</span> <span class="n">overlay_width</span><span class="p">,</span> <span class="n">overlay_opacity</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">))))</span>
+        <span class="p">):</span>
             <span class="n">count</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
             <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_gif</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
@@ -9155,7 +9245,15 @@ Credits to Justin Braaten. See also https://jstnbraaten.medium.com/goes-in-earth
 </table>
         <details class="quote">
           <summary>Source code in <code>geemap/timelapse.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_gif</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">out_gif</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;jpg&quot;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mp4</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clean_up</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_gif</span><span class="p">(</span>
+    <span class="n">images</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">out_gif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;jpg&quot;</span><span class="p">,</span>
+    <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">loop</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">mp4</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">clean_up</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a gif from a list of images.</span>
 
 <span class="sd">    Args:</span>
@@ -9167,9 +9265,6 @@ Credits to Justin Braaten. See also https://jstnbraaten.medium.com/goes-in-earth
 <span class="sd">        mp4 (bool, optional): Whether to convert the gif to mp4. Defaults to False.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">glob</span>
-    <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">images</span><span class="p">):</span>
         <span class="n">images</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;*.</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -12135,7 +12230,12 @@ Full list properties: https://developers.google.com/earth-engine/datasets/catalo
             <span class="n">col</span><span class="p">,</span> <span class="n">overlay_data</span><span class="p">,</span> <span class="n">overlay_color</span><span class="p">,</span> <span class="n">overlay_width</span><span class="p">,</span> <span class="n">overlay_opacity</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))):</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span>
+        <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">))))</span>
+    <span class="p">):</span>
         <span class="n">count</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
         <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_gif</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
@@ -12398,7 +12498,7 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
 
 
 <h2 id="geemap.timelapse.sentinel2_timelapse" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">sentinel2_timelapse</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out_gif</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">2015</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="s1">&#39;06-10&#39;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s1">&#39;09-20&#39;</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NIR&#39;</span><span class="p">,</span> <span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="s1">&#39;Green&#39;</span><span class="p">],</span> <span class="n">vis_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">,</span> <span class="n">apply_fmask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">overlay_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overlay_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">overlay_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">overlay_opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title_xy</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2%&#39;</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">),</span> <span class="n">add_text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text_xy</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2%&#39;</span><span class="p">,</span> <span class="s1">&#39;2%&#39;</span><span class="p">),</span> <span class="n">text_sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">font_type</span><span class="o">=</span><span class="s1">&#39;arial.ttf&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">add_progress_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">progress_bar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">progress_bar_height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mp4</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">sentinel2_timelapse</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out_gif</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">2015</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="s1">&#39;06-10&#39;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s1">&#39;09-20&#39;</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NIR&#39;</span><span class="p">,</span> <span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="s1">&#39;Green&#39;</span><span class="p">],</span> <span class="n">vis_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">,</span> <span class="n">apply_fmask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cloud_pct</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">overlay_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overlay_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">overlay_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">overlay_opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title_xy</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2%&#39;</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">),</span> <span class="n">add_text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text_xy</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2%&#39;</span><span class="p">,</span> <span class="s1">&#39;2%&#39;</span><span class="p">),</span> <span class="n">text_sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">font_type</span><span class="o">=</span><span class="s1">&#39;arial.ttf&#39;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">add_progress_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">progress_bar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">progress_bar_height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mp4</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.timelapse.sentinel2_timelapse" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -12489,6 +12589,12 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
         <td><code>bool</code></td>
         <td><p>Whether to apply Fmask (Function of mask) for automated clouds, cloud shadows, snow, and water masking.</p></td>
         <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>cloud_pct</code></td>
+        <td><code>int</code></td>
+        <td><p>Maximum percentage of cloud coverage allowed. Defaults to 30.</p></td>
+        <td><code>30</code></td>
       </tr>
       <tr>
         <td><code>overlay_data</code></td>
@@ -12610,6 +12716,12 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
         <td><p>If True, add fading effect to the timelapse. Defaults to False, no fading. To add fading effect, set it to True (1 second fading duration) or to an integer value (fading duration).</p></td>
         <td><code>False</code></td>
       </tr>
+      <tr>
+        <td><code>kwargs</code></td>
+        <td><code>optional</code></td>
+        <td><p>Additional arguments to pass the geemap.create_timeseries() function.</p></td>
+        <td><code>{}</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -12642,6 +12754,7 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
     <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:3857&quot;</span><span class="p">,</span>
     <span class="n">apply_fmask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cloud_pct</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
     <span class="n">overlay_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">overlay_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
     <span class="n">overlay_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -12662,6 +12775,7 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
     <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">mp4</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">fading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a Sentinel-2 timelapse GIF image. This function is adapted from https://emaprlab.users.earthengine.app/view/lt-gee-time-series-animator. A huge thank you to Justin Braaten for sharing his fantastic work.</span>
 
@@ -12678,6 +12792,7 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
 <span class="sd">        frames_per_second (int, optional): Animation speed. Defaults to 10.</span>
 <span class="sd">        crs (str, optional): Coordinate reference system. Defaults to &#39;EPSG:3857&#39;.</span>
 <span class="sd">        apply_fmask (bool, optional): Whether to apply Fmask (Function of mask) for automated clouds, cloud shadows, snow, and water masking.</span>
+<span class="sd">        cloud_pct (int, optional): Maximum percentage of cloud coverage allowed. Defaults to 30.</span>
 <span class="sd">        overlay_data (int, str, list, optional): Administrative boundary to be drawn on the timelapse. Defaults to None.</span>
 <span class="sd">        overlay_color (str, optional): Color for the overlay data. Can be any color name or hex color code. Defaults to &#39;black&#39;.</span>
 <span class="sd">        overlay_width (int, optional): Line width of the overlay. Defaults to 1.</span>
@@ -12698,6 +12813,7 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
 <span class="sd">        loop (int, optional): Controls how many times the animation repeats. The default, 1, means that the animation will play once and then stop (displaying the last frame). A value of 0 means that the animation will repeat forever. Defaults to 0.</span>
 <span class="sd">        mp4 (bool, optional): Whether to convert the GIF to MP4. Defaults to False.</span>
 <span class="sd">        fading (int | bool, optional): If True, add fading effect to the timelapse. Defaults to False, no fading. To add fading effect, set it to True (1 second fading duration) or to an integer value (fading duration).</span>
+<span class="sd">        kwargs (optional): Additional arguments to pass the geemap.create_timeseries() function.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: File path to the output GIF image.</span>
@@ -12742,21 +12858,28 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
 
-    <span class="n">allowed_bands</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;Blue&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Green&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Red&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Red Edge 1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Red Edge 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Red Edge 3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;NIR&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Red Edge 4&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SWIR1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SWIR2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;QA60&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
+    <span class="n">allowed_bands</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Blue&quot;</span><span class="p">:</span> <span class="s2">&quot;B2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Green&quot;</span><span class="p">:</span> <span class="s2">&quot;B3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Red&quot;</span><span class="p">:</span> <span class="s2">&quot;B4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Red Edge 1&quot;</span><span class="p">:</span> <span class="s2">&quot;B5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Red Edge 2&quot;</span><span class="p">:</span> <span class="s2">&quot;B6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Red Edge 3&quot;</span><span class="p">:</span> <span class="s2">&quot;B7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NIR&quot;</span><span class="p">:</span> <span class="s2">&quot;B8&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Red Edge 4&quot;</span><span class="p">:</span> <span class="s2">&quot;B8A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SWIR1&quot;</span><span class="p">:</span> <span class="s2">&quot;B11&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SWIR2&quot;</span><span class="p">:</span> <span class="s2">&quot;B12&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;QA60&quot;</span><span class="p">:</span> <span class="s2">&quot;QA60&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">allowed_bands</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bands</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SWIR1&quot;</span><span class="p">,</span> <span class="s2">&quot;NIR&quot;</span><span class="p">,</span> <span class="s2">&quot;Red&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bands</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">allowed_bands</span><span class="p">:</span>
+            <span class="n">bands</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">allowed_bands</span><span class="p">[</span><span class="n">band</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
@@ -12770,19 +12893,26 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
             <span class="n">vis_params</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;bands&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bands</span>
             <span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4000</span>
+            <span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.4</span>
             <span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="n">col</span> <span class="o">=</span> <span class="n">sentinel2_timeseries_legacy</span><span class="p">(</span>
+
+        <span class="k">if</span> <span class="s2">&quot;reducer&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;reducer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;median&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;drop_empty&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;drop_empty&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;date_format&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_format</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">sentinel2_timeseries</span><span class="p">(</span>
             <span class="n">roi</span><span class="p">,</span>
             <span class="n">start_year</span><span class="p">,</span>
             <span class="n">end_year</span><span class="p">,</span>
             <span class="n">start_date</span><span class="p">,</span>
             <span class="n">end_date</span><span class="p">,</span>
+            <span class="n">bands</span><span class="p">,</span>
             <span class="n">apply_fmask</span><span class="p">,</span>
+            <span class="n">cloud_pct</span><span class="p">,</span>
             <span class="n">frequency</span><span class="p">,</span>
-            <span class="n">date_format</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span>
-
         <span class="n">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="o">**</span><span class="n">vis_params</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="p">{</span>
@@ -12796,7 +12926,12 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
                 <span class="n">col</span><span class="p">,</span> <span class="n">overlay_data</span><span class="p">,</span> <span class="n">overlay_color</span><span class="p">,</span> <span class="n">overlay_width</span><span class="p">,</span> <span class="n">overlay_opacity</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)))):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">dimensions</span> <span class="o">&gt;</span> <span class="mi">768</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">768</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">))))</span>
+        <span class="p">):</span>
             <span class="n">count</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
             <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">out_gif</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
@@ -13069,19 +13204,40 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
     <span class="n">doy_start</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Number</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">))</span>
     <span class="n">doy_end</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Number</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">))</span>
     <span class="n">collection</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">)</span>
+        <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
         <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
         <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">calendarRange</span><span class="p">(</span><span class="n">doy_start</span><span class="p">,</span> <span class="n">doy_end</span><span class="p">,</span> <span class="s2">&quot;day_of_year&quot;</span><span class="p">))</span>
         <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s2">&quot;CLOUDY_PIXEL_PERCENTAGE&quot;</span><span class="p">,</span> <span class="n">cloud_pct</span><span class="p">))</span>
         <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">bands</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">collection</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">mask_cloud</span><span class="p">:</span>
         <span class="n">collection</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">maskS2clouds</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">toDictionary</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">propertyNames</span><span class="p">()))</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">bands</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">allowed_bands</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Blue&quot;</span><span class="p">:</span> <span class="s2">&quot;B2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Green&quot;</span><span class="p">:</span> <span class="s2">&quot;B3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Red&quot;</span><span class="p">:</span> <span class="s2">&quot;B4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Red Edge 1&quot;</span><span class="p">:</span> <span class="s2">&quot;B5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Red Edge 2&quot;</span><span class="p">:</span> <span class="s2">&quot;B6&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Red Edge 3&quot;</span><span class="p">:</span> <span class="s2">&quot;B7&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;NIR&quot;</span><span class="p">:</span> <span class="s2">&quot;B8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Red Edge 4&quot;</span><span class="p">:</span> <span class="s2">&quot;B8A&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SWIR1&quot;</span><span class="p">:</span> <span class="s2">&quot;B11&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SWIR2&quot;</span><span class="p">:</span> <span class="s2">&quot;B12&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;QA60&quot;</span><span class="p">:</span> <span class="s2">&quot;QA60&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bands</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">allowed_bands</span><span class="p">:</span>
+                <span class="n">bands</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">allowed_bands</span><span class="p">[</span><span class="n">band</span><span class="p">]</span>
+
+        <span class="n">collection</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span>
 
     <span class="n">ts</span> <span class="o">=</span> <span class="n">create_timeseries</span><span class="p">(</span>
         <span class="n">collection</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">roi</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">reducer</span><span class="p">,</span> <span class="n">drop_empty</span><span class="p">,</span> <span class="n">date_format</span>
@@ -14005,14 +14161,18 @@ based on mean composites following a steady frequency (f.e. 1 image per month)
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="../js/timeago.min.js"></script>
+        
+          <script src="../js/timeago.min.js"></script>
+        
       
-        <script src="../js/timeago_mkdocs_material.js"></script>
+        
+          <script src="../js/timeago_mkdocs_material.js"></script>
+        
       
     
   </body>

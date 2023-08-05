@@ -19,7 +19,7 @@
         <link rel="next" href="installation/">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -27,10 +27,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -296,6 +296,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#announcement" class="md-nav__link">
+    Announcement
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
@@ -698,6 +705,20 @@
   
   
     <li class="md-nav__item">
+      <a href="ee_tile_layers/" class="md-nav__link">
+        ee_tile_layers module
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="examples/" class="md-nav__link">
         examples module
       </a>
@@ -756,6 +777,20 @@
     <li class="md-nav__item">
       <a href="legends/" class="md-nav__link">
         legends module
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="map_widgets/" class="md-nav__link">
+        map_widgets module
       </a>
     </li>
   
@@ -2616,8 +2651,8 @@
   
   
     <li class="md-nav__item">
-      <a href="notebooks/112_cartoee_basemap_X/" class="md-nav__link">
-        112 cartoee basemap X
+      <a href="notebooks/112_cartoee_basemap/" class="md-nav__link">
+        112 cartoee basemap
       </a>
     </li>
   
@@ -2932,6 +2967,48 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/135_segmentation/" class="md-nav__link">
+        135 segmentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/136_download_parallel/" class="md-nav__link">
+        136 download parallel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/137_create_grid/" class="md-nav__link">
+        137 create grid
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2963,6 +3040,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#announcement" class="md-nav__link">
+    Announcement
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
@@ -3030,6 +3114,9 @@
 <li>Free software: <a href="https://opensource.org/licenses/MIT">MIT license</a></li>
 </ul>
 <p><strong>Acknowledgment:</strong> This material is based upon work supported by the National Aeronautics and Space Administration (NASA) under Grant No. 80NSSC22K1742 issued through the <a href="https://bit.ly/3RVBRcQ">Open Source Tools, Frameworks, and Libraries 2020 Program</a>.</p>
+<h2 id="announcement">Announcement<a class="headerlink" href="#announcement" title="Permanent link">&para;</a></h2>
+<p>The book <em><strong>Earth Engine and Geemap - Geospatial Data Science with Python</strong></em>, written by <a href="https://gishub.org">Qiusheng Wu</a>, has been published by Locate Press in July 2023. If you're interested in purchasing the book, please visit this URL: <a href="https://locatepress.com/book/gee">https://locatepress.com/book/gee</a>.</p>
+<p><img alt="book" src="https://images.geemap.org/book.png" /></p>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p><strong>Geemap</strong> is a Python package for interactive mapping with <a href="https://earthengine.google.com/">Google Earth Engine</a> (GEE), which is a cloud computing platform with a <a href="https://developers.google.com/earth-engine/datasets/">multi-petabyte catalog</a> of satellite imagery and geospatial datasets. During the past few years, GEE has become very popular in the geospatial community and it has empowered numerous environmental applications at local, regional, and global scales. GEE provides both JavaScript and Python APIs for making computational requests to the Earth Engine servers. Compared with the comprehensive <a href="https://developers.google.com/earth-engine">documentation</a> and interactive IDE (i.e., <a href="https://code.earthengine.google.com/">GEE JavaScript Code Editor</a>) of the GEE JavaScript API, the GEE Python API has relatively little documentation and limited functionality for visualizing results interactively. The geemap Python package was created to fill this gap. It is built upon <a href="https://github.com/jupyter-widgets/ipyleaflet">ipyleaflet</a> and <a href="https://github.com/jupyter-widgets/ipywidgets">ipywidgets</a>, and enables users to analyze and visualize Earth Engine datasets interactively within a Jupyter-based environment.</p>
 <p><strong>Geemap</strong> is intended for students and researchers, who would like to utilize the Python ecosystem of diverse libraries and tools to explore Google Earth Engine. It is also designed for existing GEE users who would like to transition from the GEE JavaScript API to Python API. The automated JavaScript-to-Python <a href="https://github.com/gee-community/geemap/blob/master/geemap/conversion.py">conversion module</a> of the geemap package can greatly reduce the time needed to convert existing GEE JavaScripts to Python scripts and Jupyter notebooks.</p>
@@ -3081,7 +3168,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-04-06T13:53:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-04-06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-07-28T04:30:48+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-28</span>
       
         <br>
         Created:
@@ -3198,14 +3285,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
       
-        <script src="js/timeago.min.js"></script>
+        
+          <script src="js/timeago.min.js"></script>
+        
       
-        <script src="js/timeago_mkdocs_material.js"></script>
+        
+          <script src="js/timeago_mkdocs_material.js"></script>
+        
       
     
   </body>

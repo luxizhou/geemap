@@ -1,5 +1,141 @@
 # Changelog
 
+## v0.25.0 - Jul 30, 2023
+
+**Improvement**
+
+-   Refactor colorbar into an ipywidgets subclass (#1640)
+-   Fixed PIL import error on Windows (#1649)
+-   Added codes to 114_dynamic_world.ipynb
+-   Added book release (#1645)
+-   Updated installation.md (#1643)
+-   Improved Sentinel-2 timelapse function (#1635)
+-   Fixed Sentinel-2 timelapse bug (#1633)
+
+**Contributors**
+
+@eocce @giswqs @naschmitz @osgeokr
+
+## v0.24.4 - Jul 17, 2023
+
+**Improvement**
+
+-   Fixed timelapse bug (#1631)
+-   Fixed typo (#1630)
+
+## v0.24.3 - Jul 11, 2023
+
+**Improvement**
+
+-   Set Output widget max width (#1626)
+
+## v0.24.2 - Jul 10, 2023
+
+**Improvement**
+
+-   Fixed colorbar width bug (#1624)
+-   Fixed stac layer expression bug (#1623)
+-   Added support for transparent legend (#1622)
+-   Auto copy js-py converted code to clipboard (#1621)
+-   Removed vis_params attribute from TileLayer (#1619)
+-   Dynamic latitude in map scale calc (#1618)
+
+## v0.24.1 - Jul 6, 2023
+
+**Improvement**
+
+-   Removed two unused variables (#1615)
+-   Fixed vis_param palette validation (#1613)
+-   Added a collapsible option for legends (#1612)
+-   Added show and opacity options for styled vector (#1610)
+
+## v0.24.0 - Jul 6, 2023
+
+**New Features**
+
+-   Split modules into core and extra features (#1601)
+-   Made toolbar customizable (#1599)
+-   Simplified geemap Map class (#1598)
+-   Added markers with custom shape and color (#1595)
+
+**Improvement**
+
+-   Updated SciPy workshop notebook and fixed bugs (#1607)
+-   Updated SciPy workshop notebook (#1608)
+-   Fix ipywidget Output widget bug (#1597)
+-   Refactor xyz_to_leaflet and tests (#1592)
+-   Removed old glob tag \_X from notebook nav path (#1594)
+-   Updated ArcGIS instructions (#1593)
+-   Refactored leaflet and folium tile layers (#1567)
+-   Refactored get_xyz_dict and added tests (#1588)
+
+## v0.23.2 - Jun 28, 2023
+
+**Improvement**
+
+-   Improve exception handling (#1587)
+-   Fixed function typo
+
+## v0.23.1 - Jun 24, 2023
+
+**New Features**
+
+-   Added create_grid function for zonal stats (#1582)
+
+**Improvement**
+
+-   Fixed toolbar GUI bug (#1584)
+
+## v0.23.0 - Jun 22, 2023
+
+**Improvement**
+
+-   Separated ee plot gui from the Map class (#1576)
+-   Separated toolbar GUI from Map class (#1575)
+-   Improved Map.add_netcdf method (#1574)
+-   Suppress gdal open raster warning (#1573)
+-   Improved Map.add_raster method (#1572)
+-   Fixed js-py conversion bug (#1571)
+-   Used sorted function instead of if statements (#1569)
+-   Added support for downloading images in parallel (#1564)
+-   Improved ee_initialize function (#1563)
+-   Added typehinting function parameter for better clarity (#1555)
+-   Updated layer manager GUI (#1553)
+
+**Contributors**
+
+@slowy07
+
+## v0.22.1 - Jun 1, 2023
+
+**Improvement**
+
+-   Fixed the ipyleaflet SplitControl bug (#1550)
+-   Added decimals param for Inspector GUI (#1548)
+-   Added decimals param for Inspector GUI (#1548)
+-   Add opened param for tool template (#1546)
+-   Updated SciPy notebook (#1545)
+
+## v0.22.0 - May 29, 2023
+
+**New Features**
+
+-   Added `Map.add_inspector()` method (#1544)
+-   Added `Map.add_layer_manager()` method (#1544)
+
+**Improvement**
+
+-   Simplified the geemap module (#1544)
+-   Deprecated the heremap module (#1543)
+
+## v0.21.0 - May 29, 2023
+
+**New Features**
+
+-   Added support for Solara (#1541)
+-   Added segmentation notebook (#1539)
+-   Added SciPy workshop notebook (#1538)
+
 ## v0.20.7 - May 16, 2023
 
 **New Features**

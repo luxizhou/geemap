@@ -146,3 +146,6 @@ More video tutorials for geemap and Earth Engine are available on my [YouTube ch
 132. Adding colorbars to a folium map ([notebook](https://geemap.org/notebooks/132_folium_colorbar))
 133. Developing interactive web apps with gradio and geemap ([notebook](https://geemap.org/notebooks/133_gradio))
 134. Downloading Earth Engine map tiles as a GeoTIFF ([notebook](https://geemap.org/notebooks/134_ee_to_geotiff))
+135. Earth Engine Image Segmentation with the Segment Anything Model ([notebook](https://geemap.org/notebooks/135_segmentation))
+136. Downloading Earth Engine images in parallel ([notebook](https://geemap.org/notebooks/136_download_parallel))
+137. Creating a rectangular grid covering a region of interest for computing zonal statistics ([notebook](https://geemap.org/notebooks/137_create_grid))
